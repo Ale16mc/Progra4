@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrograIV.AW.Products", "PrograIV.AW.Products\PrograIV.AW.Products.csproj", "{BC5B5FE3-5B40-4134-8434-BFEB7469AF40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D7279A4B-4276-4474-BB8E-CD63CA6E4D2F} = {D7279A4B-4276-4474-BB8E-CD63CA6E4D2F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrograIV.AW.Products.Model", "PrograIV.AW.Products.Model\PrograIV.AW.Products.Model.csproj", "{137CBFB1-24BF-4DA1-8E9F-41F18EF6F32F}"
 EndProject

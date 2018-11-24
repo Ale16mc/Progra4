@@ -34,6 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoBL\Productos.cs" />
+    <Compile Include="Connected Services\SI.WcfProductos\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\SI.WcfProducto\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +78,39 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Connected Services\SI.WcfProductos\PrograIV.AW.Products.SI.WcfProductos.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SI.WcfProductos\WcfAWProductos.wsdl" />
+    <None Include="Connected Services\SI.WcfProductos\WcfAWProductos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SI.WcfProductos\WcfAWProductos1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SI.WcfProductos\WcfAWProductos2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SI.WcfProductos\WcfAWProductos3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SI.WcfProducto\PrograIV.AW.Products.SI.WcfProducto.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SI.WcfProducto\WcfAWProductos.wsdl" />
+    <None Include="Connected Services\SI.WcfProducto\WcfAWProductos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SI.WcfProducto\WcfAWProductos1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SI.WcfProducto\WcfAWProductos2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SI.WcfProducto\WcfAWProductos3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\PrograIV.AW.Products.Model.Product.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -77,6 +123,49 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrograIV.AW.Products.Model\PrograIV.AW.Products.Model.csproj">
+      <Project>{137cbfb1-24bf-4da1-8e9f-41f18ef6f32f}</Project>
+      <Name>PrograIV.AW.Products.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\SI.WcfProductos\" />
+    <WCFMetadataStorage Include="Connected Services\SI.WcfProducto\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SI.WcfProductos\WcfAWProductos.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SI.WcfProductos\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SI.WcfProductos\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SI.WcfProductos\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SI.WcfProducto\WcfAWProductos.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SI.WcfProducto\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SI.WcfProducto\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SI.WcfProducto\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
