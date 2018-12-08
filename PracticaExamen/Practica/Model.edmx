@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WorkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tiendas">
+          <Key>
+            <PropertyRef Name="IdTienda" />
+          </Key>
+          <Property Name="IdTienda" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Provincia" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Canton" Type="varchar" MaxLength="25" />
+          <Property Name="Distrito" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="int" Nullable="false" />
+          <Property Name="IdZapato" Type="int" Nullable="false" />
+          <Property Name="IdTienda" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="FechaVenta" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zapatos">
+          <Key>
+            <PropertyRef Name="IdZapato" />
+          </Key>
+          <Property Name="IdZapato" Type="int" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estilo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tamano" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ParaQuien" Type="int" />
+          <Property Name="PrecioUnitario" Type="float" />
+          <Property Name="Extento" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Venta_Tiendas">
+          <End Role="Tiendas" Type="Self.Tiendas" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tiendas">
+              <PropertyRef Name="IdTienda" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="IdTienda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venta_Zapatos">
+          <End Role="Zapatos" Type="Self.Zapatos" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zapatos">
+              <PropertyRef Name="IdZapato" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="IdZapato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WorkModelStoreContainer">
+          <EntitySet Name="Tiendas" EntityType="Self.Tiendas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zapatos" EntityType="Self.Zapatos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Venta_Tiendas" Association="Self.FK_Venta_Tiendas">
+            <End Role="Tiendas" EntitySet="Tiendas" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venta_Zapatos" Association="Self.FK_Venta_Zapatos">
+            <End Role="Zapatos" EntitySet="Zapatos" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WorkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tiendas">
+          <Key>
+            <PropertyRef Name="IdTienda" />
+          </Key>
+          <Property Name="IdTienda" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Provincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Canton" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Distrito" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ventas" Relationship="Self.FK_Venta_Tiendas" FromRole="Tiendas" ToRole="Ventas" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="IdVenta" />
+          </Key>
+          <Property Name="IdVenta" Type="Int32" Nullable="false" />
+          <Property Name="IdZapato" Type="Int32" Nullable="false" />
+          <Property Name="IdTienda" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="FechaVenta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Tiendas" Relationship="Self.FK_Venta_Tiendas" FromRole="Ventas" ToRole="Tiendas" />
+          <NavigationProperty Name="Zapatos" Relationship="Self.FK_Venta_Zapatos" FromRole="Ventas" ToRole="Zapatos" />
+        </EntityType>
+        <EntityType Name="Zapatos">
+          <Key>
+            <PropertyRef Name="IdZapato" />
+          </Key>
+          <Property Name="IdZapato" Type="Int32" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estilo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tamano" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParaQuien" Type="Int32" />
+          <Property Name="PrecioUnitario" Type="Double" />
+          <Property Name="Extento" Type="Boolean" />
+          <NavigationProperty Name="Ventas" Relationship="Self.FK_Venta_Zapatos" FromRole="Zapatos" ToRole="Ventas" />
+        </EntityType>
+        <Association Name="FK_Venta_Tiendas">
+          <End Role="Tiendas" Type="Self.Tiendas" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tiendas">
+              <PropertyRef Name="IdTienda" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="IdTienda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venta_Zapatos">
+          <End Role="Zapatos" Type="Self.Zapatos" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zapatos">
+              <PropertyRef Name="IdZapato" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="IdZapato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WorkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tiendas" EntityType="Self.Tiendas" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" />
+          <EntitySet Name="Zapatos" EntityType="Self.Zapatos" />
+          <AssociationSet Name="FK_Venta_Tiendas" Association="Self.FK_Venta_Tiendas">
+            <End Role="Tiendas" EntitySet="Tiendas" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venta_Zapatos" Association="Self.FK_Venta_Zapatos">
+            <End Role="Zapatos" EntitySet="Zapatos" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WorkModelStoreContainer" CdmEntityContainer="WorkEntities">
+          <EntitySetMapping Name="Tiendas">
+            <EntityTypeMapping TypeName="WorkModel.Tiendas">
+              <MappingFragment StoreEntitySet="Tiendas">
+                <ScalarProperty Name="IdTienda" ColumnName="IdTienda" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Canton" ColumnName="Canton" />
+                <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="WorkModel.Ventas">
+              <MappingFragment StoreEntitySet="Ventas">
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="IdZapato" ColumnName="IdZapato" />
+                <ScalarProperty Name="IdTienda" ColumnName="IdTienda" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zapatos">
+            <EntityTypeMapping TypeName="WorkModel.Zapatos">
+              <MappingFragment StoreEntitySet="Zapatos">
+                <ScalarProperty Name="IdZapato" ColumnName="IdZapato" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Estilo" ColumnName="Estilo" />
+                <ScalarProperty Name="Tamano" ColumnName="Tamano" />
+                <ScalarProperty Name="ParaQuien" ColumnName="ParaQuien" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Extento" ColumnName="Extento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
